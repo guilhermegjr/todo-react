@@ -1,0 +1,20 @@
+.header {
+    height: 56px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: royalblue;
+}
+
+.button-container {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title-container {
+    flex: 1;
+    padding-left: 20px;
+}

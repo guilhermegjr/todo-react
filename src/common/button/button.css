@@ -1,0 +1,16 @@
+.button {
+    height: 40px;
+    background-color: transparent;
+    border: unset;
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none !important;
+}
+.button:hover {
+    background-color: RGBA(255, 255, 255, 0.1);
+}
+.button:active {
+    background-color: RGBA(255, 255, 255, 0.3);
+}
