@@ -5,13 +5,8 @@
     flex-direction: row;
     align-items: center;
     background-color: royalblue;
-}
-
-.button-container {
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    color: white;
+    font-weight: 300;
 }
 
 .title-container {

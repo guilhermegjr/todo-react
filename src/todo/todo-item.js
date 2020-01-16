@@ -11,11 +11,26 @@ export class TodoItem extends Component {
     }
 
     render() {
+        let titleStyle = !this.props.todo.done
+            ? this.style.title
+            : {
+                  ...this.style.title,
+                  textDecoration: 'line-through',
+                  color: 'green'
+              }
+
         return (
             <div className="todo-item">
-                <div style={this.style.title}>{this.props.todo.name}</div>
+                <div style={titleStyle}>{this.props.todo.title}</div>
                 <div style={this.style.buttonContainer}>
-                    <Button title="Excluir"></Button>
+                    <Button
+                        title={this.props.todo.done ? 'Undone' : 'Done'}
+                        onClick={this.props.toogleDone}
+                    ></Button>
+                    <Button
+                        title="Excluir"
+                        onClick={this.props.onClick}
+                    ></Button>
                 </div>
             </div>
         )

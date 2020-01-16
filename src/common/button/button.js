@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
-import './button.css'
+import './button.scss'
 
 export class Button extends Component {
     render() {
-        return <button className="button">{this.props.title}</button>
+        return (
+            <button className="button" onClick={this.props.onClick}>
+                {this.props.title}
+            </button>
+        )
     }
 }
