@@ -29,7 +29,7 @@ export class TodoItem extends Component {
                     ></Button>
                     <Button
                         title="Excluir"
-                        onClick={this.props.onClick}
+                        onClick={this.props.deleteTodo}
                     ></Button>
                 </div>
             </div>

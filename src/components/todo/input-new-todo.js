@@ -1,6 +1,8 @@
 import React from 'react'
+import { TodosActions } from '../../store/todo.actions'
+import { connect } from 'react-redux'
 
-export function InputNewTodo(props) {
+function InputNewTodo(props) {
     const style = {
         div: {
             width: '100%',
@@ -15,7 +17,7 @@ export function InputNewTodo(props) {
         }
     }
 
-    const addTodo = event => {
+    const handleKeyPress = event => {
         if (event.charCode === 13) {
             props.addTodo(event.target.value)
             event.target.value = ''
@@ -27,9 +29,17 @@ export function InputNewTodo(props) {
             <input
                 type="text"
                 style={style.input}
-                onKeyPress={addTodo.bind(this)}
+                onKeyPress={handleKeyPress.bind(this)}
                 placeholder="Add your TODO here..."
             />
         </div>
     )
 }
+
+function mapDispatchToProps(dispatch) {
+    return {
+        addTodo: text => dispatch(TodosActions.addTodo(text))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(InputNewTodo)

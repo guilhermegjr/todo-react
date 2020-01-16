@@ -1,53 +1,11 @@
 import React, { Component } from 'react'
 import './App.css'
-import { Header } from './common/header/header'
-import { TodoList } from './todo/todo-list'
-import { InputNewTodo } from './todo/input-new-todo'
-
-function AlcureBolado(props) {
-    return <p>Alcure é boladão!!!</p>
-}
+import { Header } from './components/common/header/header'
+import TodoList from './components/todo/todo-list'
+import InputNewTodo from './components/todo/input-new-todo'
+import { connect } from 'react-redux'
 
 class App extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            todos: [
-                {
-                    id: 1,
-                    title: 'My TODO',
-                    done: false
-                },
-                {
-                    id: 2,
-                    title: 'My 2o TODO',
-                    done: false
-                }
-            ]
-        }
-        this.handleRemoveTodo = this.handleRemoveTodo.bind(this)
-        this.handleAddTodo = this.handleAddTodo.bind(this)
-        this.handleToogleDone = this.handleToogleDone.bind(this)
-        this.renderNothingToDo = this.renderNothingToDo.bind(this)
-    }
-
-    handleAddTodo(title) {
-        const todo = { id: 1 + Math.random(), title }
-        this.setState({ todos: [...this.state.todos, todo] })
-    }
-
-    handleRemoveTodo(todo) {
-        this.setState({ todos: this.state.todos.filter(t => t.id !== todo.id) })
-    }
-
-    handleToogleDone(todo) {
-        this.setState({
-            todos: this.state.todos.map(t => {
-                return t.id !== todo.id ? t : { ...todo, done: !todo.done }
-            })
-        })
-    }
-
     renderNothingToDo() {
         const style = {
             display: 'flex',
@@ -57,9 +15,7 @@ class App extends Component {
             flexDirection: 'column'
         }
 
-        const thingsToDo = !!this.state.todos.filter(t => !t.done).length
-
-        return thingsToDo ? null : (
+        return this.props.todosToBeDone ? null : (
             <div style={style}>
                 <p>Great Job!</p>
                 <p>You have nothing to do. ;)</p>
@@ -70,17 +26,19 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <Header title={`TODO (${this.state.todos.length})`} />
-                <InputNewTodo addTodo={this.handleAddTodo} />
+                <Header title={`TODO (${this.props.todosToBeDone})`} />
+                <InputNewTodo />
                 {this.renderNothingToDo()}
-                <TodoList
-                    todos={this.state.todos}
-                    removeTodo={this.handleRemoveTodo}
-                    toogleDone={this.handleToogleDone}
-                />
+                <TodoList />
             </div>
         )
     }
 }
 
-export default App
+function mapStateToProps(state) {
+    return {
+        todosToBeDone: state.todos.filter(t => !t.done).length
+    }
+}
+
+export default connect(mapStateToProps, null)(App)
